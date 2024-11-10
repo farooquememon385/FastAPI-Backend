@@ -1,1 +1,1 @@
-from .models import Student, Teacher, Course, Enrolled, Department
+from models import models
