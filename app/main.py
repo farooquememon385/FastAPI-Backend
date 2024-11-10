@@ -14,3 +14,4 @@ async def index():
 app.include_router(department_router)
 app.include_router(course_router)
 app.include_router(student_router)
+app.include_router(teacher_router)
