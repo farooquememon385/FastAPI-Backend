@@ -12,3 +12,4 @@ async def index():
     return {"message": "Hello World"}
 
 app.include_router(department_router)
+app.include_router(course_router)
