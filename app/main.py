@@ -1,7 +1,11 @@
 from fastapi import FastAPI
-from app import models
+from database import init_db
+
 app = FastAPI()
 
+@app.on_event("startup")
+async def startup_event():
+    init_db()
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
