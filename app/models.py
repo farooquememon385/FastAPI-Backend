@@ -1,8 +1,8 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
-from sqlalchemy.orm import relationship, DeclarativeBase
+from sqlalchemy.orm import relationship, declarative_base
 
 
-Base = DeclarativeBase()
+Base = declarative_base()
 
 class Department(Base):
     __tablename__ = 'department'
