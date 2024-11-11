@@ -10,6 +10,7 @@
 - pydantic
 - python-multipart
 - python-dotenv
+- Docker (if you want to run the project in docker container)
 
 ## Database Diagram
 
