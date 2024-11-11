@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from database import get_db
 import csv
 from io import StringIO
+from models import Department, Teacher, Course, Student, Enrolled, CourseTaught
 import crud
 
 async def parse_csv(file: UploadFile = File(...), db: Session = Depends(get_db)):
@@ -29,39 +30,39 @@ async def parse_csv(file: UploadFile = File(...), db: Session = Depends(get_db))
         if department_name:
             department = crud.get_department_by_name(db, department_name)  # Check if it exists
             if not department:
-                department = crud.create_department(db, name=department_name)
+                department = Department(name=department_name)
                 departments.append(department)
 
         if teacher_name and department_name:
             teacher = crud.get_teacher_by_name(db, teacher_name)
-            if not teacher and department:
-                teacher = crud.create_teacher(db, name=teacher_name, department_id=department.id)
+            if not teacher and department.id:
+                teacher = Teacher(name=teacher_name, department_id=department.id)
                 teachers.append(teacher)
 
         if course_title:
             course = crud.get_course_by_title(db, course_title)
             if not course:
-                course = crud.create_course(db, title=course_title)
+                course = Course(title=course_title)
                 courses.append(course)
 
         if student_name:
             student = crud.get_student_by_name(db, student_name)
             if not student:
-                student = crud.create_student(db, name=student_name)
+                student = Student(name=student_name)
                 students.append(student)
 
-        if course_title and student_name:
+        if course_title and course.id and student_name and student.id:
             # Check if the student is already enrolled in the course
-            existing_enrollment = crud.get_enrolled(db, student_id=student.id, course_id=course.id)
+            existing_enrollment = db.query(Enrolled).filter_by(student_id=student.id, course_id=course.id).first()
             if not existing_enrollment and student and course:
-                enrollment = crud.create_enrolled(db, student_id=student.id, course_id=course.id)
+                enrollment = Enrolled(student_id=student.id, course_id=course.id)
                 enrollments.append(enrollment)
 
-        if teacher_name and course_title:
+        if teacher_name  and teacher.id and course_title and course.id:
             # Check if the teacher is already teaching the course
-            existing_course_taught = crud.get_courseTaught(db, teacher_id=teacher.id, course_id=course.id)
+            existing_course_taught = db.query(CourseTaught).filter_by(teacher_id=teacher.id, course_id=course.id).first()
             if not existing_course_taught:
-                course_taught = crud.create_courseTaught(db, teacher_id=teacher.id, course_id=course.id)
+                course_taught = CourseTaught(teacher_id=teacher.id, course_id=course.id)
                 course_taught_records.append(course_taught)
 
     # Bulk insert collected data
