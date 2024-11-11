@@ -1,7 +1,7 @@
 fastapi
 uvicorn
 sqlalchemy
-psycopg2 # sudo apt install libpq-dev
+psycopg2-binary # sudo apt install libpq-dev
 pydantic
 python-multipart # for file upload
 python-dotenv
