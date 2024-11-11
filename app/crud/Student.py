@@ -5,6 +5,9 @@ from schemas.Student import StudentCreate
 def get_student(db: Session, student_id: int):
     return db.query(Student).filter(Student.id == student_id).first()
 
+def get_student_by_name(db: Session, student_name: str):
+    return db.query(Student).filter(Student.name == student_name).first()
+
 def get_students(db: Session, skip: int = 0, limit: int = 100):
     return db.query(Student).offset(skip).limit(limit).all()
 

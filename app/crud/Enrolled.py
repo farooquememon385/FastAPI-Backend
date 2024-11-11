@@ -5,6 +5,9 @@ from schemas.Enrolled import EnrolledCreate
 def get_enrolled(db: Session, enrolled_id: int):
     return db.query(Enrolled).filter(Enrolled.id == enrolled_id).first()
 
+def get_enrolled_by_student_and_course(db: Session, student_id: int, course_id: int):
+    return db.query(Enrolled).filter(Enrolled.student_id == student_id, Enrolled.course_id == course_id).first()
+
 def get_enrolleds(db: Session, skip: int = 0, limit: int = 100):
     return db.query(Enrolled).offset(skip).limit(limit).all()
 

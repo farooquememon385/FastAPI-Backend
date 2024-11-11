@@ -5,6 +5,9 @@ from schemas.Teacher import TeacherCreate
 def get_teacher(db: Session, teacher_id: int):
     return db.query(Teacher).filter(Teacher.id == teacher_id).first()
 
+def get_teacher_by_name(db: Session, teacher_name: str):
+    return db.query(Teacher).filter(Teacher.name == teacher_name).first()
+
 def get_teachers(db: Session, skip: int = 0, limit: int = 100):
     return db.query(Teacher).offset(skip).limit(limit).all()
 

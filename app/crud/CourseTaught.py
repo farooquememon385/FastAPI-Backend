@@ -5,6 +5,9 @@ from schemas.CourseTaught import CourseTaughtCreate
 def get_courseTaught(db: Session, courseTaught_id: int):
     return db.query(CourseTaught).filter(CourseTaught.id == courseTaught_id).first()
 
+def get_courseTaught_by_teacher_and_course(db: Session, teacher_id: int, course_id: int):
+    return db.query(CourseTaught).filter(CourseTaught.teacher_id == teacher_id, CourseTaught.course_id == course_id).first()
+
 def get_courseTaughts(db: Session, skip: int = 0, limit: int = 100):
     return db.query(CourseTaught).offset(skip).limit(limit).all()
 

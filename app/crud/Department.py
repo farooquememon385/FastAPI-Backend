@@ -5,6 +5,9 @@ from schemas.Department import DepartmentCreate
 def get_department(db: Session, department_id: int):
     return db.query(Department).filter(Department.id == department_id).first()
 
+def get_department_by_name(db: Session, department_name: str):
+    return db.query(Department).filter(Department.name == department_name).first()
+
 def get_departments(db: Session, skip: int = 0, limit: int = 100):
     return db.query(Department).offset(skip).limit(limit).all()
 
