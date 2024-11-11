@@ -13,9 +13,9 @@
 
 ## Database Diagram
 
-![Diagram](app/public/dbdiagram.png)
+![Diagram](/public/DbDiagram.png)
 
-https://dbdiagram.io/d/67304c62e9daa85acae8f2ef
+[View Online](https://dbdiagram.io/d/67304c62e9daa85acae8f2ef)
 
 ## How to run
 
