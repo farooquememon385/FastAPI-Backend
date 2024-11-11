@@ -1,0 +1,14 @@
+{
+  "departments": [{ "name": "Civil" }],
+  "teachers": [{ "name": "farooq", "department_name": "Electrical" }],
+  "courses": [{ "title": "DSA" }],
+  "students": [{ "name": "Arslan" }],
+  "enrolleds": [{ "student_name": "Arslan", "course_title": "DSA" }],
+  "courseTaughts": [
+    {
+      "teacher_name": "farooq",
+      "course_title": "DSA",
+      "department_name": "Electrical"
+    }
+  ]
+}
